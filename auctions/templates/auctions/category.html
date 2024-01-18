@@ -1,0 +1,27 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Category: {{ name }}</h2>
+    <ul>
+    {% for listing in listings %}
+    <table style="border-collapse: collapse;">
+        <tr style="border-bottom: 1px solid #ddd;">
+            <td rowspan="4" width="300px" height="150px">
+                <embed type="image/jpg" src="{{ listing.image_url }}" width="200" height="100">
+            </td>
+        </tr>
+        <tr>
+            <td width="300px"><b><a href="{% url 'listing' listing.id %}">{{ listing.title }}</a></b></td>
+        </tr>
+        <tr>
+            <td width="300px">{{ listing.description}}</td>
+        </tr>
+        <tr>
+            <td width="300px">Price: ${{ listing.starting_bid}}</td>
+        </tr>
+    </table>
+    {% empty %}
+    <br><br>
+        <h4 style="color:chocolate">No listings in this category</h4>
+    {% endfor %}
+{% endblock %}
